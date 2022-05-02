@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cookie.Model;
 using Dalamud.Interface;
 using ImGuiNET;
 
@@ -19,11 +20,24 @@ public static class UiHelper
         
         ImGui.SetTooltip(tooltip);
     }
-
-    public static void Icon(FontAwesomeIcon fontAwesomeIcon)
+    
+    public static void MenuItem(string menuName, Func<string, bool> imGuiFunc, Action<string, MenuItem> action)
     {
-        ImGui.PushFont(UiBuilder.IconFont);
-        ImGui.Text(fontAwesomeIcon.ToIconString());
-        ImGui.PopFont();
+        if (!ImGui.BeginPopup(menuName))
+            return;
+        
+        foreach (var genre in CookieHelper.MenuDict.Keys.Where(ImGui.BeginMenu))
+        {
+            foreach (var label in CookieHelper.MenuDict[genre])
+            {
+                if (!imGuiFunc(label.Label))
+                    continue;
+
+                action(genre, label);
+            }
+
+            ImGui.EndMenu();
+        }
+        ImGui.EndPopup();
     }
 }

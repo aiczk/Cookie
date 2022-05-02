@@ -11,7 +11,7 @@ namespace Cookie
     {
         public int Version { get; set; } = 0;
         public List<Sender> Senders;
-        public bool ShowIconsForPartyMemberRoles;
+        public bool ShowPtRoleIcon;
 
         [NonSerialized]
         private DalamudPluginInterface pluginInterface;

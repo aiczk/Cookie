@@ -11,83 +11,101 @@ public static class CookieHelper
 {
     private const char AsciiDefaultValue = ' ';
 
-    public static readonly Dictionary<string, MenuLabel[]> MenuDict = new()
+    public static readonly Dictionary<string, MenuItem[]> MenuDict = new()
     {
         {
-            "City", new []
+            "Nations", new []
             {
-                new MenuLabel("Limsa Lominsa", '4'),
-                new MenuLabel("Gridania", '5'),
-                new MenuLabel("Ul'dah", '6'),
-                new MenuLabel("Ishgard", 'A'),
+                new MenuItem("Limsa Lominsa", '4'),
+                new MenuItem("Gridania", '5'),
+                new MenuItem("Ul'dah", '6'),
+                new MenuItem("Ishgard", 'A'),
+                new MenuItem("Doma", 'a'),
+                new MenuItem("Ala Mhigo", 'b'),
+                new MenuItem("Crystarium", 'b'),
+                new MenuItem("Sharlayan", 'r'),
+                new MenuItem("Radz-at-Han", 's'),
+                new MenuItem("Garlean Empire", 't'),
             }
         },
         {
             "Status", new []
             {
-                new MenuLabel("Sprouts", 'N'),
-                new MenuLabel("Returner", '`'),
-                new MenuLabel("Mentor", 'O'),
-                new MenuLabel("Battle Mentor", 'P'),
-                new MenuLabel("Crafter Mentor", 'Q'),
-                new MenuLabel("Mentor (PT)", 'R'),
-                new MenuLabel("Cross World", 'Y'),
+                new MenuItem("Sprouts", 'N'),
+                new MenuItem("Returner", '`'),
+                new MenuItem("Mentor", 'O'),
+                new MenuItem("Battle Mentor", 'P'),
+                new MenuItem("Crafter Mentor", 'Q'),
+                new MenuItem("Mentor", 'R'),
+                new MenuItem("Cross World", 'Y'),
             }
         },
         {
             "Role", new []
             {
-                new MenuLabel("Tank", 'S'),
-                new MenuLabel("Healer", 'T'),
-                new MenuLabel("DPS", 'U'),
-                new MenuLabel("Crafter", 'V'),
-                new MenuLabel("Gatherer", 'W'),
-                new MenuLabel("Other", 'X'),
+                new MenuItem("Tank", 'S'),
+                new MenuItem("Healer", 'T'),
+                new MenuItem("DPS", 'U'),
+                new MenuItem("Crafter", 'V'),
+                new MenuItem("Gatherer", 'W'),
+                new MenuItem("Other", 'X'),
             }
         },
         {
             "Fate", new []
             {
-                new MenuLabel("Subjugation", 'Z'),
-                new MenuLabel("Boss", '['),
-                new MenuLabel("Induction", '\\'),
-                new MenuLabel("Defense", ']'),
-                new MenuLabel("Delivery", '^'),
-                new MenuLabel("Special", '_'),
+                new MenuItem("Kill Enemies", 'Z'),
+                new MenuItem("Kill Boss", '['),
+                new MenuItem("Collect Item", '\\'),
+                new MenuItem("Defend Npc", ']'),
+                new MenuItem("Escort Npc", '^'),
+                new MenuItem("Fate 6", '_'),
+                new MenuItem("Fate 7", 'c'),
+                new MenuItem("Fête", 'n'),
+                new MenuItem("Fate 9", 'g'),
             }
         },
         {
             "Type", new []
             {
-                new MenuLabel("Fire", '9'),
-                new MenuLabel("Ice", ':'),
-                new MenuLabel("Wind", ';'),
-                new MenuLabel("Ground", '<'),
-                new MenuLabel("Lightning", '='),
-                new MenuLabel("Water", '>'),
+                new MenuItem("Fire", '9'),
+                new MenuItem("Ice", ':'),
+                new MenuItem("Wind", ';'),
+                new MenuItem("Ground", '<'),
+                new MenuItem("Lightning", '='),
+                new MenuItem("Water", '>'),
             }
         },
         {
             "Other", new []
             {
-                new MenuLabel("Arrow (Green)", '7'),
-                new MenuLabel("Arrow (Red)", '8'),
-                new MenuLabel("Aetheryte", 'B'),
-                new MenuLabel("Mini Aetheryte", 'C'),
-                new MenuLabel("Star (Filled)", 'D'),
-                new MenuLabel("Star (Unfilled)", 'E'),
-                new MenuLabel("Aether (Filled)", 'K'),
-                new MenuLabel("Aether (Unfilled)", 'L'),
-                new MenuLabel("Drawn Sword", 'H'),
-                new MenuLabel("Sheathed Sword", 'I'),
-                new MenuLabel("Dice", 'J'),
-                new MenuLabel("Ban", 'M'),
-                new MenuLabel("Warning", '@'),
-                new MenuLabel("Sync", '?'),
+                new MenuItem("Up arrow", 'j'),
+                new MenuItem("Down arrow", 'k'),
+                new MenuItem("Green arrow", '7'),
+                new MenuItem("Red arrow", '8'),
+                new MenuItem("Colorful flower", 'e'),
+                new MenuItem("Exclamation mark", 'f'),
+                new MenuItem("Contents replay", 'h'),
+                new MenuItem("Aetheryte", 'B'),
+                new MenuItem("Mini aetheryte", 'C'),
+                new MenuItem("Plus star", 'd'),
+                new MenuItem("Filled star", 'D'),
+                new MenuItem("Unfilled star", 'E'),
+                new MenuItem("Filled aether", 'K'),
+                new MenuItem("Unfilled aether", 'L'),
+                new MenuItem("Drawn sword", 'H'),
+                new MenuItem("Sheathed sword", 'I'),
+                new MenuItem("Auction", 'p'),
+                new MenuItem("Meteor", 'q'),
+                new MenuItem("Bell", 'i'),
+                new MenuItem("Dice", 'J'),
+                new MenuItem("Ban", 'M'),
+                new MenuItem("Warning", '@'),
+                new MenuItem("Sync", '?'),
             }
         },
         {
-            "Default", new []{ new MenuLabel("Nothing", AsciiDefaultValue) }
+            "Default", new []{ new MenuItem("Nothing", AsciiDefaultValue) }
         }
     };
 

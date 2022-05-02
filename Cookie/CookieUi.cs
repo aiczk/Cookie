@@ -40,7 +40,6 @@ internal class CookieUi
         if (!Visible)
             return;
 
-        ImGui.SetNextWindowSize(new Vector2(375, 300), ImGuiCond.FirstUseEver);
         if (!ImGui.Begin("Cookie", ref visible, ImGuiWindowFlags.NoResize))
             return;
         
@@ -51,9 +50,11 @@ internal class CookieUi
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CompressArrowsAlt, "Target", SetTargetName);
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Save, "Save", () => configuration.Save());
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Toolbox, "Open config window", () => settingsVisible = true);
-        ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CookieBite, "Tasty cookie.", () => {});
+        ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CookieBite, "Emojis", () => ImGui.OpenPopup("##EmojiPopup"));
         ImGui.Separator();
 
+        UiHelper.MenuItem("##EmojiPopup", ImGui.MenuItem, (_, x) => ImGui.SetClipboardText($":{x.Label.ToLower()}:"));
+        
         if(!ImGui.BeginTable("##List", 4, ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit))
             return;
         
@@ -63,26 +64,18 @@ internal class CookieUi
             var player = configuration.Senders[row];
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(255); ImGui.InputText($"##FirstName{row}", ref player.FirstName, CookieHelper.NameLength(player.FamilyName));
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(255); ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
-            ImGui.TableNextColumn(); if(ImGui.Button($"{CookieHelper.MenuDict[player.Genre][player.MarkIndex].LabelName}##Icons{row}", new Vector2(115, 22))) ImGui.OpenPopup($"##IconPopup{row}");
-            if (ImGui.BeginPopup($"##IconPopup{row}"))
-            {
-                foreach (var genre in CookieHelper.MenuDict.Keys.Where(ImGui.BeginMenu))
+            ImGui.TableNextColumn(); if(ImGui.Button($"{CookieHelper.MenuDict[player.Genre][player.MarkIndex].Label}##Icons{row}", new Vector2(115, 22))) ImGui.OpenPopup($"##IconPopup{row}");
+            UiHelper.MenuItem
+            (
+                $"##IconPopup{row}",
+                label => ImGui.MenuItem(label, null, label == CookieHelper.MenuDict[player.Genre][player.MarkIndex].Label),
+                (genre, label) =>
                 {
-                    for (var i = 0; i < CookieHelper.MenuDict[genre].Length; i++)
-                    {
-                        var label = CookieHelper.MenuDict[genre][i];
-                        if (!ImGui.MenuItem(label.LabelName, null, label.LabelName == CookieHelper.MenuDict[player.Genre][player.MarkIndex].LabelName))
-                            continue;
-
-                        player.Genre = genre;
-                        player.MarkIndex = Array.IndexOf(CookieHelper.MenuDict[genre], label);
-                        configuration.Save();
-                    }
-
-                    ImGui.EndMenu();
+                    player.Genre = genre;
+                    player.MarkIndex = Array.IndexOf(CookieHelper.MenuDict[genre], label);
+                    configuration.Save();
                 }
-                ImGui.EndPopup();
-            }
+            );
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.TableNextColumn(); if (ImGui.Button($"{FontAwesomeIcon.TrashAlt.ToIconString()}##Delete{row}")) DeletePlayer(row);
             ImGui.PopFont();
@@ -122,13 +115,16 @@ internal class CookieUi
         if (!SettingsVisible)
             return;
 
-        ImGui.SetNextWindowSize(new Vector2(500, 75), ImGuiCond.Always);
+        ImGui.SetNextWindowSize(new Vector2(400, 100), ImGuiCond.FirstUseEver);
         if (!ImGui.Begin("Cookie Config Window", ref settingsVisible, ImGuiWindowFlags.AlwaysAutoResize))
             return;
-
-        if(ImGui.Checkbox("Show icons for party member roles", ref configuration.ShowIconsForPartyMemberRoles))
-            configuration.Save();
         
+        ImGui.Text("If you would like to request a name change, please let us know through issues on Github.");
+        ImGui.Separator();
+
+        if (ImGui.Checkbox("Show icons for party member roles", ref configuration.ShowPtRoleIcon))
+            configuration.Save();
+
         ImGui.End();
     }
 }

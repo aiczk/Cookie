@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
@@ -40,17 +41,26 @@ public class Cookie : IDalamudPlugin
     
     private void ApplyMark(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
     {
+        var values = CookieHelper.MenuDict.Values.SelectMany(x => x).Select(x => x).ToList();
+        //a
+        message = Regex.Replace(message.TextValue, ":(\\w| |'|-)+:",
+            match =>
+            {
+                var menuItem = values.FirstOrDefault(mi => mi.Label.ToLower() == match.Value.Trim(':'));
+                return menuItem != null ? $"{menuItem.Ascii}" : match.Value;
+            });
+
         if(sender == null)
             return;
         
         var senderName = sender.TextValue;
-        if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowIconsForPartyMemberRoles)
+        var player = Configuration.Senders.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
+        if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
         {
             sender = $"{senderName[..1]}{CookieHelper.BuildName(CookieHelper.GetMemberRoleAscii(senderName), senderName.Remove(0, 1))}";
             return;
         }
 
-        var player = Configuration.Senders.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
         if(player == null)
             return;
         
