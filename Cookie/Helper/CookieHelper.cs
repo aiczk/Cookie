@@ -26,6 +26,7 @@ public static class CookieHelper
             "Status", new []
             {
                 new MenuLabel("Sprouts", 'N'),
+                new MenuLabel("Returner", '`'),
                 new MenuLabel("Mentor", 'O'),
                 new MenuLabel("Battle Mentor", 'P'),
                 new MenuLabel("Crafter Mentor", 'Q'),
@@ -34,7 +35,7 @@ public static class CookieHelper
             }
         },
         {
-            "Battle", new []
+            "Role", new []
             {
                 new MenuLabel("Tank", 'S'),
                 new MenuLabel("Healer", 'T'),
@@ -45,11 +46,32 @@ public static class CookieHelper
             }
         },
         {
+            "Fate", new []
+            {
+                new MenuLabel("Subjugation", 'Z'),
+                new MenuLabel("Boss", '['),
+                new MenuLabel("Induction", '\\'),
+                new MenuLabel("Defense", ']'),
+                new MenuLabel("Delivery", '^'),
+                new MenuLabel("Special", '_'),
+            }
+        },
+        {
+            "Type", new []
+            {
+                new MenuLabel("Fire", '9'),
+                new MenuLabel("Ice", ':'),
+                new MenuLabel("Wind", ';'),
+                new MenuLabel("Ground", '<'),
+                new MenuLabel("Lightning", '='),
+                new MenuLabel("Water", '>'),
+            }
+        },
+        {
             "Other", new []
             {
                 new MenuLabel("Arrow (Green)", '7'),
                 new MenuLabel("Arrow (Red)", '8'),
-                new MenuLabel("Unknown", '9'),
                 new MenuLabel("Aetheryte", 'B'),
                 new MenuLabel("Mini Aetheryte", 'C'),
                 new MenuLabel("Star (Filled)", 'D'),
@@ -60,7 +82,8 @@ public static class CookieHelper
                 new MenuLabel("Sheathed Sword", 'I'),
                 new MenuLabel("Dice", 'J'),
                 new MenuLabel("Ban", 'M'),
-                new MenuLabel("Fate", 'Z'),
+                new MenuLabel("Warning", '@'),
+                new MenuLabel("Sync", '?'),
             }
         },
         {

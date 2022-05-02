@@ -1,8 +1,8 @@
-[
     {
         "Author": "aiczk",
         "Name": "Cookie",
         "Description": "A plugin that adds icons to player names in chat logs.",
+        "Punchline": "Yummy",
         "InternalName": "Cookie",
         "IconUrl": "https://github.com/aiczk/Cookie/raw/main/Resource/cookie.png",
         "AssemblyVersion": "1.2.0.2",
@@ -18,4 +18,3 @@
         "DownloadLinkTesting": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip",
         "DownloadLinkUpdate": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip"
     }
-]
