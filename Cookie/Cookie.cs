@@ -50,7 +50,7 @@ public class Cookie : IDalamudPlugin
             return;
         }
 
-        var player = Configuration.Players.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
+        var player = Configuration.Senders.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
         if(player == null)
             return;
         

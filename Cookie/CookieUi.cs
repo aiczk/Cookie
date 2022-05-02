@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using Cookie.Helper;
+using Cookie.Model;
 using Dalamud.Game.Gui.ContextMenus;
 using Dalamud.Interface;
 using ImGuiNET;
@@ -56,10 +57,10 @@ internal class CookieUi
         if(!ImGui.BeginTable("##List", 4, ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit))
             return;
         
-        for (var row = 0; row < configuration.Players.Count; row++)
+        for (var row = 0; row < configuration.Senders.Count; row++)
         {
             ImGui.TableNextRow();
-            var player = configuration.Players[row];
+            var player = configuration.Senders[row];
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(255); ImGui.InputText($"##FirstName{row}", ref player.FirstName, CookieHelper.NameLength(player.FamilyName));
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(255); ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
             ImGui.TableNextColumn(); if(ImGui.Button($"{CookieHelper.MenuDict[player.Genre][player.MarkIndex].LabelName}##Icons{row}", new Vector2(115, 22))) ImGui.OpenPopup($"##IconPopup{row}");
@@ -96,16 +97,16 @@ internal class CookieUi
         if(string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(familyName))
             return;
             
-        if(configuration.Players.Exists(x => $"{x.FirstName} {x.FamilyName}" == $"{firstName} {familyName}"))
+        if(configuration.Senders.Exists(x => $"{x.FirstName} {x.FamilyName}" == $"{firstName} {familyName}"))
             return;
         
-        configuration.Players.Add(new Player(firstName, familyName, "Default", 0));
+        configuration.Senders.Add(new Sender(firstName, familyName, "Default", 0));
         configuration.Save();
     }
 
     private void DeletePlayer(int row)
     {
-        configuration.Players.RemoveAt(row);
+        configuration.Senders.RemoveAt(row);
         configuration.Save();
     }
 

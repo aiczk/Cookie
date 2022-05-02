@@ -5,7 +5,7 @@
         "Description": "A plugin that adds icons to player names in chat logs.",
         "InternalName": "Cookie",
         "IconUrl": "https://github.com/aiczk/Cookie/raw/main/Resource/cookie.png",
-        "AssemblyVersion": "1.2.0.1",
+        "AssemblyVersion": "1.2.0.2",
         "RepoUrl": "https://github.com/aiczk/Cookie",
         "ApplicableVersion": "any",
         "DalamudApiLevel": 6,

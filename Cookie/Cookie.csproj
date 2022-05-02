@@ -44,9 +44,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FFXIVClientStructs-main\FFXIVClientStructs\FFXIVClientStructs.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Lumina.Excel" Version="6.1.1" />
   </ItemGroup>
   

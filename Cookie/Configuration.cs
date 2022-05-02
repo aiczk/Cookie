@@ -2,6 +2,7 @@
 using Dalamud.Plugin;
 using System;
 using System.Collections.Generic;
+using Cookie.Model;
 
 namespace Cookie
 {
@@ -9,7 +10,7 @@ namespace Cookie
     public class Configuration : IPluginConfiguration
     {
         public int Version { get; set; } = 0;
-        public List<Player> Players;
+        public List<Sender> Senders;
         public bool ShowIconsForPartyMemberRoles;
 
         [NonSerialized]
@@ -17,31 +18,5 @@ namespace Cookie
 
         public void Initialize(DalamudPluginInterface pluginInterface) => this.pluginInterface = pluginInterface;
         public void Save() => pluginInterface.SavePluginConfig(this);
-    }
-
-    public class Player
-    {
-        public string FirstName, FamilyName, Genre;
-        public int MarkIndex;
-
-        public Player(string firstName, string familyName, string genre, int markIndex)
-        {
-            FirstName = firstName;
-            FamilyName = familyName;
-            Genre = genre;
-            MarkIndex = markIndex;
-        }
-    }
-
-    public class MenuLabel
-    {
-        public readonly string LabelName;
-        public readonly char Ascii;
-
-        public MenuLabel(string labelName, char ascii)
-        {
-            LabelName = labelName;
-            Ascii = ascii;
-        }
     }
 }

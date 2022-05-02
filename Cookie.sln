@@ -5,12 +5,6 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookie", "Cookie\Cookie.csproj", "{13C812E9-0D42-4B95-8646-40EEBF30636F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs", "FFXIVClientStructs-main\FFXIVClientStructs\FFXIVClientStructs.csproj", "{907DEB00-B767-4E6C-8413-17E607793DA0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.Generators", "FFXIVClientStructs-main\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj", "{98ECE8F8-BCB9-4187-8B72-9E526C0979A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CExporter", "FFXIVClientStructs-main\ida\CExporter\CExporter.csproj", "{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,18 +15,6 @@ Global
 		{13C812E9-0D42-4B95-8646-40EEBF30636F}.Debug|x64.Build.0 = Debug|x64
 		{13C812E9-0D42-4B95-8646-40EEBF30636F}.Release|x64.ActiveCfg = Release|x64
 		{13C812E9-0D42-4B95-8646-40EEBF30636F}.Release|x64.Build.0 = Release|x64
-		{907DEB00-B767-4E6C-8413-17E607793DA0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{907DEB00-B767-4E6C-8413-17E607793DA0}.Debug|x64.Build.0 = Debug|Any CPU
-		{907DEB00-B767-4E6C-8413-17E607793DA0}.Release|x64.ActiveCfg = Release|Any CPU
-		{907DEB00-B767-4E6C-8413-17E607793DA0}.Release|x64.Build.0 = Release|Any CPU
-		{98ECE8F8-BCB9-4187-8B72-9E526C0979A6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{98ECE8F8-BCB9-4187-8B72-9E526C0979A6}.Debug|x64.Build.0 = Debug|Any CPU
-		{98ECE8F8-BCB9-4187-8B72-9E526C0979A6}.Release|x64.ActiveCfg = Release|Any CPU
-		{98ECE8F8-BCB9-4187-8B72-9E526C0979A6}.Release|x64.Build.0 = Release|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|x64.Build.0 = Debug|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|x64.ActiveCfg = Release|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
