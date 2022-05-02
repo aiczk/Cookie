@@ -54,11 +54,11 @@ public static class CookieHelper
         {
             "Fate", new []
             {
-                new MenuItem("Kill Enemies", 'Z'),
-                new MenuItem("Kill Boss", '['),
-                new MenuItem("Collect Item", '\\'),
-                new MenuItem("Defend Npc", ']'),
-                new MenuItem("Escort Npc", '^'),
+                new MenuItem("Kill enemies", 'Z'),
+                new MenuItem("Kill boss", '['),
+                new MenuItem("Collect item", '\\'),
+                new MenuItem("Defend npc", ']'),
+                new MenuItem("Escort npc", '^'),
                 new MenuItem("Fate 6", '_'),
                 new MenuItem("Fate 7", 'c'),
                 new MenuItem("Fête", 'n'),

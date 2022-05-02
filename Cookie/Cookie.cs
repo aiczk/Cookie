@@ -41,8 +41,7 @@ public class Cookie : IDalamudPlugin
     
     private void ApplyMark(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
     {
-        var values = CookieHelper.MenuDict.Values.SelectMany(x => x).Select(x => x).ToList();
-        //a
+        var values = CookieHelper.MenuDict.Values.SelectMany(x => x).Select(x => x).ToArray();
         message = Regex.Replace(message.TextValue, ":(\\w| |'|-)+:",
             match =>
             {

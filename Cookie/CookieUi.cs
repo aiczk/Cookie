@@ -119,7 +119,7 @@ internal class CookieUi
         if (!ImGui.Begin("Cookie Config Window", ref settingsVisible, ImGuiWindowFlags.AlwaysAutoResize))
             return;
         
-        ImGui.Text("If you would like to request a name change, please let us know through issues on Github.");
+        ImGui.Text("If you would like to request a icon name change, please let us know through issues on Github.");
         ImGui.Separator();
 
         if (ImGui.Checkbox("Show icons for party member roles", ref configuration.ShowPtRoleIcon))
