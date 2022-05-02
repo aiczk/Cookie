@@ -1,128 +1,137 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Cookie.Model;
 using Dalamud.Game.ClientState.Objects.Enums;
+using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.Game.Text.SeStringHandling.Payloads;
 
 namespace Cookie.Helper;
 
 public static class CookieHelper
 {
-    private const char AsciiDefaultValue = ' ';
+    public static PlayerCharacter Lp => DalamudContainer.ClientState.LocalPlayer!;
 
-    public static readonly Dictionary<string, MenuItem[]> MenuDict = new()
+    public static readonly Dictionary<string, BitmapFontIcon[]> Menu = new()
     {
         {
-            "Nations", new []
+            "Regions", new []
             {
-                new MenuItem("Limsa Lominsa", '4'),
-                new MenuItem("Gridania", '5'),
-                new MenuItem("Ul'dah", '6'),
-                new MenuItem("Ishgard", 'A'),
-                new MenuItem("Doma", 'a'),
-                new MenuItem("Ala Mhigo", 'b'),
-                new MenuItem("Crystarium", 'b'),
-                new MenuItem("Sharlayan", 'r'),
-                new MenuItem("Radz-at-Han", 's'),
-                new MenuItem("Garlean Empire", 't'),
+                BitmapFontIcon.LaNoscea,
+                BitmapFontIcon.BlackShroud,
+                BitmapFontIcon.Thanalan,
+                BitmapFontIcon.Ishgard,
+                BitmapFontIcon.FarEast,
+                BitmapFontIcon.GyrAbania,
+                BitmapFontIcon.Crystarium,
+                BitmapFontIcon.Sharlayan,
+                BitmapFontIcon.Ilsabard,
+                BitmapFontIcon.Garlemald,
             }
         },
         {
             "Status", new []
             {
-                new MenuItem("Sprouts", 'N'),
-                new MenuItem("Returner", '`'),
-                new MenuItem("Mentor", 'O'),
-                new MenuItem("Battle Mentor", 'P'),
-                new MenuItem("Crafter Mentor", 'Q'),
-                new MenuItem("Mentor", 'R'),
-                new MenuItem("Cross World", 'Y'),
+                BitmapFontIcon.NewAdventurer,
+                BitmapFontIcon.Returner,
+                BitmapFontIcon.Mentor,
+                BitmapFontIcon.MentorPvE,
+                BitmapFontIcon.MentorPvP,
+                BitmapFontIcon.MentorCrafting,
+                BitmapFontIcon.MentorProblem,
+                BitmapFontIcon.CrossWorld,
             }
         },
         {
             "Role", new []
             {
-                new MenuItem("Tank", 'S'),
-                new MenuItem("Healer", 'T'),
-                new MenuItem("DPS", 'U'),
-                new MenuItem("Crafter", 'V'),
-                new MenuItem("Gatherer", 'W'),
-                new MenuItem("Other", 'X'),
+                BitmapFontIcon.Tank,
+                BitmapFontIcon.Healer,
+                BitmapFontIcon.DPS,
+                BitmapFontIcon.Crafter,
+                BitmapFontIcon.Gatherer,
+                BitmapFontIcon.AnyClass,
             }
         },
         {
             "Fate", new []
             {
-                new MenuItem("Kill enemies", 'Z'),
-                new MenuItem("Kill boss", '['),
-                new MenuItem("Collect item", '\\'),
-                new MenuItem("Defend npc", ']'),
-                new MenuItem("Escort npc", '^'),
-                new MenuItem("Fate 6", '_'),
-                new MenuItem("Fate 7", 'c'),
-                new MenuItem("Fête", 'n'),
-                new MenuItem("Fate 9", 'g'),
+                BitmapFontIcon.FateBoss,
+                BitmapFontIcon.FateCrafting,
+                BitmapFontIcon.FateDefend,
+                BitmapFontIcon.FateEscort,
+                BitmapFontIcon.FateGather,
+                BitmapFontIcon.FateSlay,
+                BitmapFontIcon.FateSpecial1,
+                BitmapFontIcon.FateSpecial2,
+                BitmapFontIcon.FateUnknownGold
             }
         },
         {
-            "Type", new []
+            "Element", new []
             {
-                new MenuItem("Fire", '9'),
-                new MenuItem("Ice", ':'),
-                new MenuItem("Wind", ';'),
-                new MenuItem("Ground", '<'),
-                new MenuItem("Lightning", '='),
-                new MenuItem("Water", '>'),
+                BitmapFontIcon.ElementEarth,
+                BitmapFontIcon.ElementFire,
+                BitmapFontIcon.ElementIce,
+                BitmapFontIcon.ElementIce,
+                BitmapFontIcon.ElementLightning,
+                BitmapFontIcon.ElementWater,
+                BitmapFontIcon.ElementWind
             }
         },
         {
-            "Other", new []
+            "Other",new []
             {
-                new MenuItem("Up arrow", 'j'),
-                new MenuItem("Down arrow", 'k'),
-                new MenuItem("Green arrow", '7'),
-                new MenuItem("Red arrow", '8'),
-                new MenuItem("Colorful flower", 'e'),
-                new MenuItem("Exclamation mark", 'f'),
-                new MenuItem("Contents replay", 'h'),
-                new MenuItem("Aetheryte", 'B'),
-                new MenuItem("Mini aetheryte", 'C'),
-                new MenuItem("Plus star", 'd'),
-                new MenuItem("Filled star", 'D'),
-                new MenuItem("Unfilled star", 'E'),
-                new MenuItem("Filled aether", 'K'),
-                new MenuItem("Unfilled aether", 'L'),
-                new MenuItem("Drawn sword", 'H'),
-                new MenuItem("Sheathed sword", 'I'),
-                new MenuItem("Auction", 'p'),
-                new MenuItem("Meteor", 'q'),
-                new MenuItem("Bell", 'i'),
-                new MenuItem("Dice", 'J'),
-                new MenuItem("Ban", 'M'),
-                new MenuItem("Warning", '@'),
-                new MenuItem("Sync", '?'),
+                BitmapFontIcon.AutoTranslateBegin,
+                BitmapFontIcon.AutoTranslateEnd,
+                BitmapFontIcon.LevelSync,
+                BitmapFontIcon.Warning,
+                BitmapFontIcon.Aetheryte,
+                BitmapFontIcon.Aethernet,
+                BitmapFontIcon.GoldStar,
+                BitmapFontIcon.SilverStar,
+                BitmapFontIcon.GreenDot,
+                BitmapFontIcon.SwordUnsheathed,
+                BitmapFontIcon.SwordSheathed,
+                BitmapFontIcon.Dice,
+                BitmapFontIcon.FlyZone,
+                BitmapFontIcon.FlyZoneLocked,
+                BitmapFontIcon.NoCircle,
+                BitmapFontIcon.NewAdventurer,
+                BitmapFontIcon.PriorityWorld,
+                BitmapFontIcon.ElementalLevel,
+                BitmapFontIcon.ExclamationRectangle,
+                BitmapFontIcon.NotoriousMonster,
+                BitmapFontIcon.Recording,
+                BitmapFontIcon.Alarm,
+                BitmapFontIcon.ArrowUp,
+                BitmapFontIcon.ArrowDown,
+                BitmapFontIcon.OrangeDiamond,
+                BitmapFontIcon.FanFestival,
+
             }
         },
         {
-            "Default", new []{ new MenuItem("Nothing", AsciiDefaultValue) }
+            "Default", new []
+            {
+                BitmapFontIcon.None
+            }
         }
     };
 
-    public static char GetMemberRoleAscii(string senderName)
+    public static BitmapFontIcon GetMemberRoleIcon(string senderName)
     {
         return DalamudContainer.PartyList.First(x => senderName.Contains(x.Name.TextValue)).ClassJob.GameData!.Role switch
         {
-            0 => 'X',
-            1 => 'S',
-            2 => 'U',
-            3 => 'U',
-            4 => 'T',
-            _ => AsciiDefaultValue
+            1 => BitmapFontIcon.Tank,
+            4 => BitmapFontIcon.Healer,
+            2 => BitmapFontIcon.DPS,
+            3 => BitmapFontIcon.DPS,
+            _ => BitmapFontIcon.AnyClass
         };
     }
-
-    public static SeString BuildName(char ascii, string name) => ascii == AsciiDefaultValue ? name : $"{ascii}{name}";
 
     public static (string, string) GetTargetName()
     {

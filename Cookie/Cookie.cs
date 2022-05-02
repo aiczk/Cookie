@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
@@ -10,6 +11,7 @@ using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.Gui.ContextMenus;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.Game.Text.SeStringHandling.Payloads;
 
 namespace Cookie;
 
@@ -41,29 +43,43 @@ public class Cookie : IDalamudPlugin
     
     private void ApplyMark(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
     {
-        var values = CookieHelper.MenuDict.Values.SelectMany(x => x).Select(x => x).ToArray();
-        message = Regex.Replace(message.TextValue, ":(\\w| |'|-)+:",
-            match =>
-            {
-                var menuItem = values.FirstOrDefault(mi => mi.Label.ToLower() == match.Value.Trim(':'));
-                return menuItem != null ? $"{menuItem.Ascii}" : match.Value;
-            });
-
         if(sender == null)
             return;
         
-        var senderName = sender.TextValue;
-        var player = Configuration.Senders.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
+        var messageBuilder = new SeStringBuilder();
+        foreach (var splitMessage in Regex.Split(message.TextValue, "(:\\w+:)"))
+        {
+            if (splitMessage.StartsWith(":"))
+            {
+                messageBuilder.AddIcon(Enum.Parse<BitmapFontIcon>(splitMessage.Trim(':')));
+                continue;
+            }
+            
+            messageBuilder.AddText(splitMessage);
+        }
+        message = messageBuilder.BuiltString;
+        
+        var stringBuilder = new SeStringBuilder();
+        var senderHw = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Lp.HomeWorld.Id;
         if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
         {
-            sender = $"{senderName[..1]}{CookieHelper.BuildName(CookieHelper.GetMemberRoleAscii(senderName), senderName.Remove(0, 1))}";
+            var pName = (sender.Payloads.ElementAtOrDefault(1) as TextPayload)?.Text ?? sender.TextValue;
+            stringBuilder.AddText(pName[..1]);
+            stringBuilder.AddIcon(CookieHelper.GetMemberRoleIcon(pName.Remove(0, 1)));
+            stringBuilder.Add(new PlayerPayload(pName.Remove(0, 1), senderHw));
+            sender = stringBuilder.BuiltString;
             return;
         }
 
+        var senderName = sender.TextValue;
+        var player = Configuration.Senders.Find(x => $"{x.FirstName} {x.FamilyName}" == senderName);
         if(player == null)
             return;
-        
-        sender = CookieHelper.BuildName(CookieHelper.MenuDict[player.Genre][player.MarkIndex].Ascii, senderName);
+
+        stringBuilder.AddIcon(CookieHelper.Menu[player.Genre][player.MarkIndex]);
+        stringBuilder.Add(new PlayerPayload(senderName, senderHw));
+
+        sender = stringBuilder.BuiltString;
     }
 
     void IDisposable.Dispose()
