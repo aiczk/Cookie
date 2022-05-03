@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Linq;
 using System.Numerics;
 using Cookie.Helper;
 using Cookie.Model;
-using Dalamud.Game.Gui.ContextMenus;
 using Dalamud.Interface;
 using ImGuiNET;
 
-namespace Cookie.UI;
+namespace Cookie;
 
 internal class CookieUi
 {
-    private static readonly Vector2 WindowSize = new(710, 300);
+    private static readonly Vector2 WindowSize = new(640, 200);
     private bool visible, settingsVisible;
     public bool Visible
     {
@@ -42,12 +40,12 @@ internal class CookieUi
             return;
 
         ImGui.SetNextWindowSize(WindowSize, ImGuiCond.FirstUseEver);
-        ImGui.SetNextWindowSizeConstraints(WindowSize, WindowSize);
+        ImGui.SetNextWindowSizeConstraints(new Vector2(WindowSize.X, 100), WindowSize);
         if (!ImGui.Begin("Cookie", ref visible))
             return;
         
-        ImGui.SetNextItemWidth(255); ImGui.InputText("##FirstName", ref firstName, CookieHelper.NameLength(familyName));
-        ImGui.SetNextItemWidth(255); ImGui.SameLine(); ImGui.InputText("##FamilyName", ref familyName, CookieHelper.NameLength(firstName));
+        ImGui.SetNextItemWidth(210); ImGui.InputText("##FirstName", ref firstName, CookieHelper.NameLength(familyName));
+        ImGui.SetNextItemWidth(210); ImGui.SameLine(); ImGui.InputText("##FamilyName", ref familyName, CookieHelper.NameLength(firstName));
         
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.UserPlus, "Add", AddPlayer);
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CompressArrowsAlt, "Target", SetTargetName);
@@ -65,8 +63,8 @@ internal class CookieUi
         {
             ImGui.TableNextRow();
             var player = configuration.Senders[row];
-            ImGui.TableNextColumn(); ImGui.SetNextItemWidth(255); ImGui.InputText($"##FirstName{row}", ref player.FirstName, CookieHelper.NameLength(player.FamilyName));
-            ImGui.TableNextColumn(); ImGui.SetNextItemWidth(235); ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
+            ImGui.TableNextColumn(); ImGui.SetNextItemWidth(210); ImGui.InputText($"##FirstName{row}", ref player.FirstName, CookieHelper.NameLength(player.FamilyName));
+            ImGui.TableNextColumn(); ImGui.SetNextItemWidth(210); ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
             ImGui.TableNextColumn(); if(ImGui.Button($"{CookieHelper.Menu[player.Genre][player.MarkIndex]}##Icons{row}", new Vector2(140, 22))) ImGui.OpenPopup($"##IconPopup{row}");
             UiHelper.MenuItem
             (

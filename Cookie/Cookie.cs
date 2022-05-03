@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using Dalamud.IoC;
 using Cookie.Helper;
-using Cookie.UI;
-using Dalamud.Game.ClientState.Objects.Enums;
-using Dalamud.Game.Gui.ContextMenus;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
@@ -45,28 +41,36 @@ public class Cookie : IDalamudPlugin
     {
         if(sender == null)
             return;
-        
+
         var messageBuilder = new SeStringBuilder();
-        foreach (var splitMessage in Regex.Split(message.TextValue, "(:\\w+:)"))
+        foreach (var payload in message.Payloads)
         {
-            if (splitMessage.StartsWith(":"))
+            if (payload.Type != PayloadType.RawText)
             {
-                messageBuilder.AddIcon(Enum.Parse<BitmapFontIcon>(splitMessage.Trim(':')));
+                messageBuilder.Add(payload);
                 continue;
             }
             
-            messageBuilder.AddText(splitMessage);
+            foreach (var text in Regex.Split((payload as TextPayload)?.Text ?? string.Empty, "(:\\w+:)"))
+            {
+                if (text.StartsWith(":"))
+                {
+                    messageBuilder.AddIcon(Enum.Parse<BitmapFontIcon>(text.Trim(':')));
+                    continue;
+                }
+                messageBuilder.AddText(text);
+            }
         }
         message = messageBuilder.BuiltString;
         
         var stringBuilder = new SeStringBuilder();
-        var senderHw = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Lp.HomeWorld.Id;
+        var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Player.HomeWorld.Id;
         if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
         {
             var pName = (sender.Payloads.ElementAtOrDefault(1) as TextPayload)?.Text ?? sender.TextValue;
             stringBuilder.AddText(pName[..1]);
             stringBuilder.AddIcon(CookieHelper.GetMemberRoleIcon(pName.Remove(0, 1)));
-            stringBuilder.Add(new PlayerPayload(pName.Remove(0, 1), senderHw));
+            stringBuilder.Add(new PlayerPayload(pName.Remove(0, 1), homeWorldId));
             sender = stringBuilder.BuiltString;
             return;
         }
@@ -77,7 +81,7 @@ public class Cookie : IDalamudPlugin
             return;
 
         stringBuilder.AddIcon(CookieHelper.Menu[player.Genre][player.MarkIndex]);
-        stringBuilder.Add(new PlayerPayload(senderName, senderHw));
+        stringBuilder.Add(new PlayerPayload(senderName, homeWorldId));
 
         sender = stringBuilder.BuiltString;
     }

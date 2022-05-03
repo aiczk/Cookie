@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Cookie.Model;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
 
 namespace Cookie.Helper;
 
 public static class CookieHelper
 {
-    public static PlayerCharacter Lp => DalamudContainer.ClientState.LocalPlayer!;
+    public static PlayerCharacter Player => DalamudContainer.ClientState.LocalPlayer!;
 
     public static readonly Dictionary<string, BitmapFontIcon[]> Menu = new()
     {
@@ -92,14 +88,12 @@ public static class CookieHelper
                 BitmapFontIcon.Aethernet,
                 BitmapFontIcon.GoldStar,
                 BitmapFontIcon.SilverStar,
-                BitmapFontIcon.GreenDot,
                 BitmapFontIcon.SwordUnsheathed,
                 BitmapFontIcon.SwordSheathed,
                 BitmapFontIcon.Dice,
                 BitmapFontIcon.FlyZone,
                 BitmapFontIcon.FlyZoneLocked,
                 BitmapFontIcon.NoCircle,
-                BitmapFontIcon.NewAdventurer,
                 BitmapFontIcon.PriorityWorld,
                 BitmapFontIcon.ElementalLevel,
                 BitmapFontIcon.ExclamationRectangle,
