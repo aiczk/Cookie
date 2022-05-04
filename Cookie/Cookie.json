@@ -1,27 +1,27 @@
 [
-        {
-                "Author": "aiczk",
-                "Name": "Cookie",
-                "Description": "A plugin that adds an icon to the player name and message in the chat log.",
-                "Punchline": "Emoji (built-in only) are supported.",
-                "Changelog": "Made italics available.\nIf you enclose the string in asterisks, the font will change to italics.",
-                "InternalName": "Cookie",
-                "IconUrl": "https://github.com/aiczk/Cookie/raw/main/Resource/cookie.png",
-                "AssemblyVersion": "1.3.2",
-                "RepoUrl": "https://github.com/aiczk/Cookie",
-                "ApplicableVersion": "any",
-                "DalamudApiLevel": 6,
-                "CategoryTags": [
-                        "UI"
-                ],
-                "ImageUrls": [
-                        "https://github.com/aiczk/Cookie/raw/main/Resource/plogon.png",
-                        "https://github.com/aiczk/Cookie/raw/main/Resource/partychat.png"
-                ],
-                "IsHide": false,
-                "IsTestingExclusive": false,
-                "DownloadLinkInstall": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip",
-                "DownloadLinkTesting": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip",
-                "DownloadLinkUpdate": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip"
-        }
+  {
+    "Author": "aiczk", 
+    "Name": "Cookie",
+    "Description": "A plugin that adds an icon to the player name and message in the chat log.",
+    "Punchline": "Emoji (built-in only) are supported.",
+    "Changelog": "Made italics available.\nIf you enclose the string in asterisks, the font will change to italics.",
+    "InternalName": "Cookie",
+    "IconUrl": "https://github.com/aiczk/Cookie/raw/main/Resource/cookie.png",
+    "AssemblyVersion": "1.3.2",
+    "RepoUrl": "https://github.com/aiczk/Cookie",
+    "ApplicableVersion": "any",
+    "DalamudApiLevel": 6,
+    "CategoryTags": [
+      "UI"
+    ],
+    "ImageUrls": [
+      "https://github.com/aiczk/Cookie/raw/main/Resource/plogon.png",
+      "https://github.com/aiczk/Cookie/raw/main/Resource/partychat.png"
+    ],
+    "IsHide": false,
+    "IsTestingExclusive": false,
+    "DownloadLinkInstall": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip",
+    "DownloadLinkTesting": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/aiczk/Cookie/raw/main/Resource/latest.zip"
+  }
 ]

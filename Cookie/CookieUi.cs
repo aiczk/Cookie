@@ -54,7 +54,7 @@ internal class CookieUi
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CookieBite, "Emojis", () => ImGui.OpenPopup("##EmojiPopup"));
         ImGui.Separator();
 
-        UiHelper.MenuItem("##EmojiPopup", ImGui.MenuItem, (_, x) => ImGui.SetClipboardText($":{x.ToString()}:"));
+        UiHelper.CreateMenu("##EmojiPopup", ImGui.MenuItem, (_, label) => ImGui.SetClipboardText($":{label.ToString()}:"));
         
         if(!ImGui.BeginTable("##List", 4, ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit))
             return;
@@ -66,7 +66,7 @@ internal class CookieUi
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(210); ImGui.InputText($"##FirstName{row}", ref player.FirstName, CookieHelper.NameLength(player.FamilyName));
             ImGui.TableNextColumn(); ImGui.SetNextItemWidth(210); ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
             ImGui.TableNextColumn(); if(ImGui.Button($"{CookieHelper.Menu[player.Genre][player.MarkIndex]}##Icons{row}", new Vector2(140, 22))) ImGui.OpenPopup($"##IconPopup{row}");
-            UiHelper.MenuItem
+            UiHelper.CreateMenu
             (
                 $"##IconPopup{row}",
                 label => ImGui.MenuItem(label, null, label == CookieHelper.Menu[player.Genre][player.MarkIndex].ToString()),

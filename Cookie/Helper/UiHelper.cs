@@ -22,7 +22,7 @@ public static class UiHelper
         ImGui.SetTooltip(tooltip);
     }
     
-    public static void MenuItem(string menuName, Func<string, bool> imGuiFunc, Action<string, BitmapFontIcon> action)
+    public static void CreateMenu(string menuName, Func<string, bool> imGuiFunc, Action<string, BitmapFontIcon> action)
     {
         if (!ImGui.BeginPopup(menuName))
             return;
