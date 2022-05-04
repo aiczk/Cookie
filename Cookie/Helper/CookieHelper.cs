@@ -71,7 +71,6 @@ public static class CookieHelper
                 BitmapFontIcon.ElementEarth,
                 BitmapFontIcon.ElementFire,
                 BitmapFontIcon.ElementIce,
-                BitmapFontIcon.ElementIce,
                 BitmapFontIcon.ElementLightning,
                 BitmapFontIcon.ElementWater,
                 BitmapFontIcon.ElementWind

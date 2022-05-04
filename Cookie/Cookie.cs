@@ -51,18 +51,25 @@ public class Cookie : IDalamudPlugin
                 continue;
             }
             
-            foreach (var text in Regex.Split((payload as TextPayload)?.Text ?? string.Empty, "(:\\w+:)"))
+            foreach (var text in Regex.Split((payload as TextPayload)?.Text ?? string.Empty, "([:|*][\\w| ]+[:|*])"))
             {
-                if (text.StartsWith(":"))
+                if (text.StartsWith(":") && Enum.TryParse<BitmapFontIcon>(text.Trim(':'), out var icon))
                 {
-                    messageBuilder.AddIcon(Enum.Parse<BitmapFontIcon>(text.Trim(':')));
+                    messageBuilder.AddIcon(icon);
                     continue;
                 }
+
+                if (text.StartsWith("*"))
+                {
+                    messageBuilder.AddItalics(text.Trim('*'));
+                    continue;
+                }
+                
                 messageBuilder.AddText(text);
             }
         }
         message = messageBuilder.BuiltString;
-        
+
         var stringBuilder = new SeStringBuilder();
         var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Player.HomeWorld.Id;
         if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
