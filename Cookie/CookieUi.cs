@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using Cookie.Helper;
 using Cookie.Model;
@@ -52,6 +53,14 @@ internal class CookieUi
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Save, "Save", () => configuration.Save());
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Toolbox, "Open config window", () => settingsVisible = true);
         ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CookieBite, "Emojis", () => ImGui.OpenPopup("##EmojiPopup"));
+        ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Coffee, "Support on ko-fi", () =>
+        {
+            var info = new ProcessStartInfo("https://ko-fi.com/aiczk")
+            {
+                UseShellExecute = true
+            };
+            Process.Start(info);
+        });
         ImGui.Separator();
 
         UiHelper.CreateMenu("##EmojiPopup", ImGui.MenuItem, (_, label) => ImGui.SetClipboardText($":{label.ToString()}:"));
