@@ -7,7 +7,7 @@
     "Changelog": "Made italics available.\nIf you enclose the string in asterisks, the font will change to italics.",
     "InternalName": "Cookie",
     "IconUrl": "https://github.com/aiczk/Cookie/raw/main/Resource/cookie.png",
-    "AssemblyVersion": "1.3.2",
+    "AssemblyVersion": "1.3.3",
     "RepoUrl": "https://github.com/aiczk/Cookie",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 6,

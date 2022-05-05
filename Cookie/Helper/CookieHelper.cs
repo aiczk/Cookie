@@ -8,7 +8,7 @@ namespace Cookie.Helper;
 
 public static class CookieHelper
 {
-    public static PlayerCharacter Player => DalamudContainer.ClientState.LocalPlayer!;
+    public static PlayerCharacter? Player => DalamudContainer.ClientState.LocalPlayer;
 
     public static readonly Dictionary<string, BitmapFontIcon[]> Menu = new()
     {

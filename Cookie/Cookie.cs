@@ -71,7 +71,7 @@ public class Cookie : IDalamudPlugin
         message = messageBuilder.BuiltString;
 
         var stringBuilder = new SeStringBuilder();
-        var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Player.HomeWorld.Id;
+        var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Player?.HomeWorld.Id ?? 0;
         if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
         {
             var pName = (sender.Payloads.ElementAtOrDefault(1) as TextPayload)?.Text ?? sender.TextValue;
