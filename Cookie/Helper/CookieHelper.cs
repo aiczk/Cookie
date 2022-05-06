@@ -4,9 +4,9 @@ using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.Text.SeStringHandling;
 
-namespace Cookie.Helper;
-
-public static class CookieHelper
+namespace Cookie.Helper
+{
+    public static class CookieHelper
 {
     public static PlayerCharacter? Player => DalamudContainer.ClientState.LocalPlayer;
 
@@ -138,4 +138,5 @@ public static class CookieHelper
     }
 
     public static uint NameLength(string firstName) => (uint)(20 - firstName.Length);
+}
 }

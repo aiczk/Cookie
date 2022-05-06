@@ -1,15 +1,16 @@
-﻿namespace Cookie.Model;
-
-public class Sender
+﻿namespace Cookie.Model
 {
-    public string FirstName, FamilyName, Genre;
-    public int MarkIndex;
-
-    public Sender(string firstName, string familyName, string genre, int markIndex)
+    public class Sender
     {
-        FirstName = firstName;
-        FamilyName = familyName;
-        Genre = genre;
-        MarkIndex = markIndex;
+        public string FirstName, FamilyName, Genre;
+        public int MarkIndex;
+
+        public Sender(string firstName, string familyName, string genre, int markIndex)
+        {
+            FirstName = firstName;
+            FamilyName = familyName;
+            Genre = genre;
+            MarkIndex = markIndex;
+        }
     }
 }
