@@ -8,7 +8,7 @@ namespace Cookie.Helper
 {
     public static class CookieHelper
 {
-    public static PlayerCharacter? Player => DalamudContainer.ClientState.LocalPlayer;
+    public static PlayerCharacter Player => DalamudContainer.ClientState.LocalPlayer;
 
     public static readonly Dictionary<string, BitmapFontIcon[]> Menu = new()
     {
@@ -116,7 +116,7 @@ namespace Cookie.Helper
 
     public static BitmapFontIcon GetMemberRoleIcon(string senderName)
     {
-        return DalamudContainer.PartyList.First(x => senderName.Contains(x.Name.TextValue)).ClassJob.GameData!.Role switch
+        return DalamudContainer.PartyList.FirstOrDefault(x => senderName.Contains(x.Name.TextValue))?.ClassJob.GameData?.Role switch
         {
             1 => BitmapFontIcon.Tank,
             4 => BitmapFontIcon.Healer,
