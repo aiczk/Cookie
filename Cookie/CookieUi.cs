@@ -46,24 +46,16 @@ namespace Cookie
             if (!ImGui.Begin("Cookie", ref visible))
                 return;
 
-            ImGui.SetNextItemWidth(210);
-            ImGui.InputText("##FirstName", ref firstName, CookieHelper.NameLength(familyName));
-            ImGui.SetNextItemWidth(210);
+            ImGui.SetNextItemWidth(210); ImGui.InputText("##FirstName", ref firstName, CookieHelper.NameLength(familyName));
             ImGui.SameLine();
-            ImGui.InputText("##FamilyName", ref familyName, CookieHelper.NameLength(firstName));
+            ImGui.SetNextItemWidth(210); ImGui.InputText("##FamilyName", ref familyName, CookieHelper.NameLength(firstName));
 
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.UserPlus, "Add", AddPlayer);
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.CompressArrowsAlt, "Target", SetTargetName);
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.Save, "Save", () => configuration.Save());
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.Toolbox, "Open config window", () => settingsVisible = true);
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.CookieBite, "Emojis", () => ImGui.OpenPopup("##EmojiPopup"));
-            ImGui.SameLine();
-            UiHelper.Button(FontAwesomeIcon.Coffee, "Support on ko-fi", () =>
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.UserPlus, "Add", AddPlayer);
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CompressArrowsAlt, "Target", SetTargetName);
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Save, "Save", () => configuration.Save());
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Toolbox, "Open config window", () => settingsVisible = true);
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.CookieBite, "Emojis", () => ImGui.OpenPopup("##EmojiPopup"));
+            ImGui.SameLine(); UiHelper.Button(FontAwesomeIcon.Coffee, "Support on ko-fi", () =>
             {
                 var info = new ProcessStartInfo("https://ko-fi.com/aiczk")
                 {
@@ -73,11 +65,9 @@ namespace Cookie
             });
             ImGui.Separator();
 
-            UiHelper.CreateMenu("##EmojiPopup", ImGui.MenuItem,
-                (_, label) => ImGui.SetClipboardText($":{label.ToString()}:"));
+            UiHelper.CreateMenu("##EmojiPopup", ImGui.MenuItem, (_, label) => ImGui.SetClipboardText($":{label.ToString()}:"));
 
-            if (!ImGui.BeginTable("##List", 4,
-                    ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit))
+            if (!ImGui.BeginTable("##List", 4, ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit))
                 return;
 
             for (var row = 0; row < configuration.Senders.Count; row++)
@@ -91,13 +81,11 @@ namespace Cookie
                 ImGui.SetNextItemWidth(210);
                 ImGui.InputText($"##FamilyName{row}", ref player.FamilyName, CookieHelper.NameLength(player.FirstName));
                 ImGui.TableNextColumn();
-                if (ImGui.Button($"{CookieHelper.Menu[player.Genre][player.MarkIndex]}##Icons{row}",
-                        new Vector2(140, 22))) ImGui.OpenPopup($"##IconPopup{row}");
+                if (ImGui.Button($"{CookieHelper.Menu[player.Genre][player.MarkIndex]}##Icons{row}", new Vector2(140, 22))) ImGui.OpenPopup($"##IconPopup{row}");
                 UiHelper.CreateMenu
                 (
                     $"##IconPopup{row}",
-                    label => ImGui.MenuItem(label, null,
-                        label == CookieHelper.Menu[player.Genre][player.MarkIndex].ToString()),
+                    label => ImGui.MenuItem(label, null, label == CookieHelper.Menu[player.Genre][player.MarkIndex].ToString()),
                     (genre, label) =>
                     {
                         player.Genre = genre;

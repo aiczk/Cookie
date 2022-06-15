@@ -51,8 +51,7 @@ namespace Cookie
                     continue;
                 }
 
-                foreach (var text in Regex.Split((payload as TextPayload)?.Text ?? string.Empty,
-                             "([:|*][\\w| ]+[:|*])"))
+                foreach (var text in Regex.Split((payload as TextPayload)?.Text ?? string.Empty, "([:|*][\\w| ]+[:|*])"))
                 {
                     if (text.StartsWith(":") && Enum.TryParse<BitmapFontIcon>(text.Trim(':'), out var icon))
                     {
@@ -73,8 +72,7 @@ namespace Cookie
             message = messageBuilder.BuiltString;
 
             var stringBuilder = new SeStringBuilder();
-            var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ??
-                              CookieHelper.Player?.HomeWorld.Id ?? 0;
+            var homeWorldId = (sender.Payloads.ElementAtOrDefault(0) as PlayerPayload)?.World.RowId ?? CookieHelper.Player?.HomeWorld.Id ?? 0;
             if (type is XivChatType.Party or XivChatType.CrossParty && Configuration.ShowPtRoleIcon)
             {
                 var pName = (sender.Payloads.ElementAtOrDefault(1) as TextPayload)?.Text ?? sender.TextValue;
